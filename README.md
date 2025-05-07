@@ -3,8 +3,8 @@ to compile
 
 
 
-prereqisites:
-    gnu cpp compiler (ive been using the msys 64 compiler)
-    go-gl
-    go-sdl
-    SDL2 something something
+prereqisites:\
+    - gnu cpp compiler (ive been using the msys 64 compiler)\
+    - go-gl\
+    - go-sdl\
+    - SDL2 something something\
