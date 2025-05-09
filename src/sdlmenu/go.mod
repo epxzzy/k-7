@@ -1,4 +1,4 @@
-module github.com/epxzzy/k-7/sdlmenu
+module github.com/epxzzy/k-7/src/sdlmenu
 
 go 1.22.5
 

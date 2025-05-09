@@ -27,6 +27,9 @@ build-router:
 	@echo "building router"
 	(cd src/router && go build -o ../../$(BIN_DIR)/router/router.exe)
 
+run-router:
+	@echo "running router"
+	./build/bin/router/router
 
 clean:
 	@echo "Cleaning build artifacts..."
