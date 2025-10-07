@@ -16,7 +16,7 @@ func main() {
   rand.Seed(time.Now().UnixNano())
 
   // Create window and canvas
-  wnd, cv, err := sdlcanvas.CreateWindow(1024, 768, "Canvas Animation")
+  wnd, cv, err := sdlcanvas.CreateWindow(1024, 768, "survey_program")
   if err != nil {
     panic(err);
   }

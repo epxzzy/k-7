@@ -21,11 +21,11 @@ build: build-sdlmenu build-router
 
 build-sdlmenu:
 	@echo "building sdlmenu"
-	(cd src/sdlmenu && go build -tags static -o ../../$(BIN_DIR)/sdlmenu/sdlmenu.exe)
+	(cd src/sdlmenu && go build -tags static -v -o ../../$(BIN_DIR)/sdlmenu/sdlmenu.exe)
 
 build-router:
 	@echo "building router"
-	(cd src/router && go build -o ../../$(BIN_DIR)/router/router.exe)
+	(cd src/router && go build -v -o ../../$(BIN_DIR)/router/router.exe)
 
 run-router:
 	@echo "running router"
