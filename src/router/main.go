@@ -15,6 +15,7 @@ func main(){
   lagger.Log(helper.ScheduleProgramLog, "loose")
   inplut := helper.GetTextInput();
   fmt.Println("LADIES AND MEN WE HAVE  " + inplut)
+	//shows up late for some reason
   spinner();
 
 }

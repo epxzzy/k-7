@@ -21,11 +21,15 @@ build: build-sdlmenu build-router
 
 build-sdlmenu:
 	@echo "building sdlmenu"
-	(cd src/sdlmenu && go build -tags static -v -o ../../$(BIN_DIR)/sdlmenu/sdlmenu.exe)
+	(cd src/sdlmenu && go build -tags static -v -o ../../$(BIN_DIR)/sdlmenu/sdlmenu)
 
 build-router:
 	@echo "building router"
-	(cd src/router && go build -v -o ../../$(BIN_DIR)/router/router.exe)
+	(cd src/router && go build -v -o ../../$(BIN_DIR)/router/router)
+
+run-sdlmenu:
+	@echo "running sdlmenu"
+	./build/bin/sdlmenu/sdlmenu
 
 run-router:
 	@echo "running router"
@@ -42,9 +46,6 @@ test:
 		(cd $$module && GO111MODULE=on go test -v ./...); \
 	done
 
-run-router: build
-	@echo "Starting router module..."
-	@$(BIN_DIR)/router
 
 vendor:
 	@for module in $(MODULE_DIRS); do \
@@ -52,15 +53,6 @@ vendor:
 		(cd $$module && GO111MODULE=on go mod vendor); \
 	done
 
-# Cross-compilation 
-build-linux:
-	@for module in $(MODULE_DIRS); do \
-		echo "Building $$module for Linux..."; \
-		(cd $$module && \
-			GOOS=linux GOARCH=amd64 GO111MODULE=on go build \
-			-o $(BIN_DIR)/linux-amd64/$$(basename $$module) \
-			.); \
-	done
 
 # Dependency resolution between modules
 $(BIN_DIR)/router: $(BIN_DIR)/sdlmenu $(BIN_DIR)/cli
