@@ -22,7 +22,7 @@ func (q *Queue) Enqueue(elem string) {
 func (q *Queue) Dequeue() string {
 	if q.IsEmpty() {
 		fmt.Println("Underflow")
-		return 0;
+		return "";
 	}
 
 	element := q.Elements[0]

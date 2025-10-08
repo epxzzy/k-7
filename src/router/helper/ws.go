@@ -1,10 +1,9 @@
 package helper
 
 import (
-	"flag"
 	"log"
 	"net/http"
-
+	//"flag"
 	"github.com/gorilla/websocket"
 )
 var SendQueue = Queue{Size: 10};
@@ -16,11 +15,14 @@ var websocketer = websocket.Upgrader{
 	},
 }
 
-func initWsServer(){
-	flag.Parse();
-	log.SetFlags(0);
-	http.HandleFunc("/k7_client", httpshandler);
-	log.Fatal(http.ListenAndServe(":8080", nil))
+
+//var addr = flag.String("addr", "localhost:8080", "http service address")
+
+func InitWsServer() bool {
+	//flag.Parse()
+	http.HandleFunc("/tunnel", httpshandler);
+	log.Fatal(http.ListenAndServe("127.0.0.1:8080", nil))
+	return true
 }
 
 func SendToClient(msg string){
@@ -39,32 +41,45 @@ func httpshandler(w http.ResponseWriter, r *http.Request) {
 		return;
 	}
 
-	defer conn.Close();
 
-	WsServerLoop(conn)
+	go WsServerSLoop(conn)
+	go WsServerRLoop(conn)
+
+
 }
 
 
-func WsServerLoop(conn *websocket.Conn){
+func WsServerRLoop(conn *websocket.Conn){
 	for {
-		mt, message, err := conn.ReadMessage()
+		_, message, err := conn.ReadMessage()
 		if err != nil {
 			log.Println("reader died lmao: ", err)
+			defer conn.Close();
 			break
+
 		}
 
 		RecieveQueue.Enqueue(string(message));
 		//log.Printf("recv: %s", message)
 		//send shit if there is shit
+	}
+
+
+}
+func WsServerSLoop(conn *websocket.Conn){
+	for {
+		//log.Printf("recv: %s", message)
+		//send shit if there is shit
 		if SendQueue.IsEmpty() == false {
-			err = conn.WriteMessage(mt, []byte(SendQueue.Dequeue()))
+			err := conn.WriteMessage(1, []byte(SendQueue.Dequeue()))
 
 			if err != nil {
 				log.Println("cant send no mo: ", err)
+				defer conn.Close();
 				break
-			}
 
+			}
 		}
 	}
-
 }
+
