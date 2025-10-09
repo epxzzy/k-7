@@ -14,26 +14,32 @@ func main(){
 	//lagger.Log(helper.ScheduleProgramLog, "loose")
 	go helper.InitWsServer()
 
-	for {
-		if helper.RecieveQueue.IsEmpty() == false {
-			for {
-				if helper.RecieveQueue.GetLength() == 0 {
-					break
-				}
+	go func (){
+		for {
+			if helper.RecieveQueue.IsEmpty() == false {
+				for {
+					if helper.RecieveQueue.GetLength() == 0 {
+						break
+					}
 
-				lagger.Log(helper.LlmProgramLog, helper.RecieveQueue.Dequeue())
+					lagger.Log(helper.LlmProgramLog, helper.RecieveQueue.Dequeue())
+				}
 			}
 		}
+	}()
 
-		inplut := helper.GetTextInput();
-		//fmt.Println("LADIES AND MEN WE HAVE  " + inplut)
-		//shows up late for some reason
-		//spinner();
+	func (){
+		for {
+			inplut := helper.GetTextInput();
+			//fmt.Println("LADIES AND MEN WE HAVE  " + inplut)
+			//shows up late for some reason
+			//spinner();
 
 
-		helper.SendToClient(inplut)
-		lagger.Log(helper.ActProgramLog, "sending: " +inplut)
+			helper.SendToClient(inplut)
+			lagger.Log(helper.ActProgramLog, "sending: " +inplut)
 
-	}
+		}
+	}()
 
 }
