@@ -14,6 +14,7 @@ type AnimationState struct {
 	CurrentMode   string
 	Normal        ModeConfig
 	Hyperdrive    ModeConfig
+	Keygen        ModeConfig
 	RedShake      ModeConfig
 	GlitchMatrix  ModeConfig
 	ShakeCounter  int
@@ -42,6 +43,7 @@ func NewAnimationState() *AnimationState {
 		CurrentMode: "NORMAL",
 		Normal:      ModeConfig{Front: baseFront, Back: baseBack},
 		Hyperdrive:  ModeConfig{Front: baseFront, Back: baseBack},
+		Keygen:  		ModeConfig{Front: baseFront, Back: baseBack},
 		RedShake:    ModeConfig{Front: baseFront, Back: baseBack},
 		GlitchMatrix: ModeConfig{
 			Front: baseFront,

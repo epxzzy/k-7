@@ -79,6 +79,25 @@ func updateHyperdriveMode(cv *canvas.Canvas, state *AnimationState, width, heigh
   drawPattern(cv, &state.Hyperdrive.Front, width, height)
 }
 
+func updateKeygenMode(cv *canvas.Canvas, state *AnimationState, width, height int) {
+  state.Keygen.Front.Speed = 1
+  state.Keygen.Back.Speed = 1
+
+  rgb_colour := []string{"#42C2FF", "#85F4FF", "#B8FFF9"}
+  inverted_rgb_colour := []string{"#0B2447", "#19376D", "#576CBC"}
+
+  colour := rand.Intn(3)
+
+  state.Keygen.Back.Color = inverted_rgb_colour[colour]
+  state.Keygen.Front.Color = rgb_colour[colour]
+
+  go updatePatternPosition(&state.Keygen.Back)
+  drawPattern(cv, &state.Keygen.Back, width, height)
+  go updatePatternPosition(&state.Keygen.Front)
+  drawPattern(cv, &state.Keygen.Front, width, height)
+}
+
+
 func updateRedShakeMode(cv *canvas.Canvas, state *AnimationState, width, height int) {
   if state.ShakeCounter%120 == 0 {
     state.RedShake.Front.Angle, state.RedShake.Back.Angle = 

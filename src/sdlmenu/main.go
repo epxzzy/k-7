@@ -38,6 +38,10 @@ func main() {
       mode = "HYPERDRIVE"
       fmt.Println("current mode is hyperdrive")
 
+    case sdl.SCANCODE_L:
+      mode = "KEYGEN"
+      fmt.Println("current mode is keygen")
+
     case sdl.SCANCODE_R:
       mode = "REDSHAKE"
       fmt.Println("current mode is redshake")
@@ -87,6 +91,8 @@ func UpdateAnimation(cv *canvas.Canvas, state *AnimationState, mode string) {
 		updateNormalMode(cv, state, width, height)
 	case "HYPERDRIVE":
 		updateHyperdriveMode(cv, state, width, height)
+	case "KEYGEN":
+		updateKeygenMode(cv, state, width, height)
 	case "REDSHAKE":
 		updateRedShakeMode(cv, state, width, height)
 	case "GLITCHMATRIX":

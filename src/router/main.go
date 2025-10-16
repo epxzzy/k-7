@@ -6,7 +6,7 @@ import (
 )
 
 func main(){
-	//spinner := helper.ShowSpinner("eyoo", 50, nil);
+	//spinner := helper.ShowSpinner("Spinner is Spinning...", 50, nil);
 	lagger := helper.Logger{DisableSystemProgramLogs: false};
 	//lagger.Log(helper.SystemProgramLog, "rule")
 	//lagger.Log(helper.ActProgramLog, "brawl")
@@ -22,7 +22,7 @@ func main(){
 						break
 					}
 
-					lagger.Log(helper.LlmProgramLog, helper.RecieveQueue.Dequeue())
+					lagger.Log(helper.SystemProgramLog, helper.RecieveQueue.Dequeue())
 				}
 			}
 		}
@@ -33,7 +33,6 @@ func main(){
 			inplut := helper.GetTextInput();
 			//fmt.Println("LADIES AND MEN WE HAVE  " + inplut)
 			//shows up late for some reason
-			//spinner();
 
 
 			helper.SendToClient(inplut)
@@ -41,5 +40,6 @@ func main(){
 
 		}
 	}()
+	//spinner();
 
 }

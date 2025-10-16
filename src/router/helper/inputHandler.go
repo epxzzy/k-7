@@ -17,6 +17,7 @@ func GetTextInput() string {
 
 	reader := bufio.NewReader(os.Stdin)
 	input, err := reader.ReadString('\n')
+
 	if err != nil {
 		fmt.Println("\nError reading input:", err)
 		return "nien inplu biatch error" 
@@ -24,7 +25,7 @@ func GetTextInput() string {
 
 	input = strings.TrimSpace(input)
 	if strings.ToLower(input) == "n" {
-		return "no inppoo biatch" 
+		return "no input given" 
 	}
 	
 	return input
@@ -60,6 +61,11 @@ func ShowSpinner(text string, delay time.Duration, chars []string) func() {
 			"(=  )",
 			"(== )",
       "(===)",
+      "(===)",
+      "(===)",
+      "(===)",
+      "(===)",
+
 		}
     */
 

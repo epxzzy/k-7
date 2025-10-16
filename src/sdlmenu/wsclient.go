@@ -16,14 +16,13 @@ func initWsClient(){
 	conn, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
 
 	if err != nil {
-		log.Fatal("dialer died dialing: ", err)
+		log.Printf("dialer died dialing: ", err)
+	} else {
+		go WsClientRLoop(conn)
+		go WsClientSLoop(conn)
 	}
-
-	go WsClientRLoop(conn)
-	go WsClientSLoop(conn)
-
-
 }
+
 
 func SendToServer(msg string){
 	SendQueueC.Enqueue(msg)
