@@ -38,7 +38,7 @@ func main() {
       mode = "HYPERDRIVE"
       fmt.Println("current mode is hyperdrive")
 
-    case sdl.SCANCODE_L:
+    case sdl.SCANCODE_K:
       mode = "KEYGEN"
       fmt.Println("current mode is keygen")
 

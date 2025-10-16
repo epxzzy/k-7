@@ -1,9 +1,11 @@
 package main
 
 import (
-  "math"
-  "math/rand"
-  "github.com/tfriedel6/canvas"
+	"fmt"
+	"math"
+	"math/rand"
+	"time"
+	"github.com/tfriedel6/canvas"
 )
 
 func updatePatternPosition(pattern *PatternConfig) {
@@ -51,6 +53,7 @@ func drawPattern(cv *canvas.Canvas, p *PatternConfig, width, height int) {
   }
 }
 
+
 func updateNormalMode(cv *canvas.Canvas, state *AnimationState, width, height int) {
   go updatePatternPosition(&state.Normal.Back)
   drawPattern(cv, &state.Normal.Back, width, height)
@@ -83,13 +86,18 @@ func updateKeygenMode(cv *canvas.Canvas, state *AnimationState, width, height in
   state.Keygen.Front.Speed = 1
   state.Keygen.Back.Speed = 1
 
-  rgb_colour := []string{"#42C2FF", "#85F4FF", "#B8FFF9"}
-  inverted_rgb_colour := []string{"#0B2447", "#19376D", "#576CBC"}
+	
+	bbc := time.Now().Second();	
+	
+	colourFG := keygencolour(int(time.Now().UnixMilli()), 0.5, 0.5)
+	colourBG := keygencolour(int(time.Now().UnixMilli()), 0.2, 0.3)
 
-  colour := rand.Intn(3)
 
-  state.Keygen.Back.Color = inverted_rgb_colour[colour]
-  state.Keygen.Front.Color = rgb_colour[colour]
+	fmt.Println("colourfg: ", colourFG, " current second: ", bbc)
+	
+
+  state.Keygen.Back.Color = colourBG
+  state.Keygen.Front.Color = colourFG 
 
   go updatePatternPosition(&state.Keygen.Back)
   drawPattern(cv, &state.Keygen.Back, width, height)
