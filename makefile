@@ -18,6 +18,7 @@ TEST_DIR := src/test
 .PHONY: build clean test run
 	
 build: build-sdlmenu build-router
+run: run-sdlmenu run-router
 
 build-sdlmenu:
 	@echo "building sdlmenu"
